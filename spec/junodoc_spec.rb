@@ -19,14 +19,12 @@ describe JunoDoc::Document do
 
   it "should be able to add text to the document" do
     @junodoc.add_text("istanbul, not constantinople")
-    @junodoc.write_document(Dir.pwd + '/test')
     @junodoc.close_document
   end
 
   it "should be able to add a paragraph break" do
     @junodoc.add_text("istanbul, not constantinople")
     @junodoc.add_paragraph_break
-    @junodoc.write_document(Dir.pwd + '/test')
     @junodoc.close_document
   end
 
@@ -34,7 +32,14 @@ describe JunoDoc::Document do
     @junodoc.add_text("istanbul, not constantinople")
     @junodoc.add_paragraph_break
     @junodoc.add_image('http://whoahbot.com/images/octocat.png')
-    @junodoc.write_document(Dir.pwd + '/test')
+    @junodoc.close_document
+  end
+
+  it "should be able to write out the document to disk" do
+    @junodoc.add_text("istanbul, not constantinople")
+    @junodoc.add_paragraph_break
+    @junodoc.add_image('http://whoahbot.com/images/octocat.png')
+    @junodoc.write_document(Dir.pwd + '/test.doc')
     @junodoc.close_document
   end
 end
