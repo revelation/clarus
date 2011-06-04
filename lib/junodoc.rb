@@ -1,4 +1,4 @@
-require "junodoc/version"
+require 'junodoc/version'
 require 'java'
 
 $CLASSPATH << '/Applications/OpenOffice.org.app/Contents/MacOS/'
@@ -19,7 +19,7 @@ module JunoDoc
     def initialize
       @context = create_context
       @doc = open_writer(@context)
-
+      @stored_document = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::frame::XStorable.java_class, @doc)
       @document_text = @doc.getText
       @cursor = @document_text.createTextCursor
     end
@@ -50,12 +50,31 @@ module JunoDoc
     def open_writer(context)
       xMCF = context.getServiceManager();
       oDesktop = xMCF.createInstanceWithContext("com.sun.star.frame.Desktop", context);
-      xCLoader = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::frame::XComponentLoader.java_class, oDesktop);
+      xCLoader = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::frame::XComponentLoader.java_class, oDesktop)
       # This is creating a new java array
       szEmptyArgs = Java::com.sun.star.beans.PropertyValue[0].new
-      xComp = xCLoader.loadComponentFromURL("private:factory/swriter", "_blank", 0, szEmptyArgs);
-      xDoc = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::text::XTextDocument.java_class, xComp);
-      return xDoc;
+      xComp = xCLoader.loadComponentFromURL("private:factory/swriter", "_blank", 0, szEmptyArgs)
+      xDoc = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::text::XTextDocument.java_class, xComp)
+      return xDoc
+    end
+
+    def write_document(path)
+      propertyValues = Java::com::sun::star::beans::PropertyValue[2].new
+      propertyValues[0] = Java::com::sun::star::beans::PropertyValue.new
+      propertyValues[0].Name = "Overwrite"
+      propertyValues[0].Value = true
+
+      propertyValues[1] = Java::com::sun::star::beans::PropertyValue.new
+      propertyValues[1].Name = "FilterName"
+      propertyValues[1].Value = "doc"
+
+      sStoreUrl = "file://#{path}.doc"
+      @stored_document.storeAsURL(sStoreUrl, propertyValues)
+    end
+
+    def close_document
+      xCloseable = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::util::XCloseable.java_class, @stored_document);
+      xCloseable.close(false);
     end
   end
 end
