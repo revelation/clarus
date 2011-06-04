@@ -1,0 +1,3 @@
+JunoDoc - a jRuby interface to OpenOffice.org's UNO interface.
+
+This is a jruby library to test the feasibility of using the UNO java API to generate documents programmatically.
