@@ -17,8 +17,30 @@ module JunoDoc
     attr_accessor :name
 
     def initialize
-      component_context = create_context()
-      open_writer(component_context);
+      @context = create_context
+      @doc = open_writer(@context)
+
+      @document_text = @doc.getText
+      @cursor = @document_text.createTextCursor
+    end
+
+    def add_text(text)
+      @document_text.insertString(@cursor, text, false )
+    end
+
+    def add_image(image_url)
+       xMSFDoc = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::lang::XMultiServiceFactory.java_class, @doc)
+      oGraphic = xMSFDoc.createInstance("com.sun.star.text.TextGraphicObject")
+
+      xPropSet = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::beans::XPropertySet.java_class, oGraphic)
+      xPropSet.setPropertyValue("GraphicURL", image_url)
+
+      xTextContent = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::text::XTextContent.java_class, oGraphic)
+      @document_text.insertTextContent(@cursor, xTextContent, true);
+    end
+
+    def add_paragraph_break
+      @document_text.insertControlCharacter(@cursor, com::sun::star::text::ControlCharacter.PARAGRAPH_BREAK, false)
     end
 
     def create_context
