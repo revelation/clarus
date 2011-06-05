@@ -29,7 +29,7 @@ module JunoDoc
     end
 
     def add_image(image_url)
-       xMSFDoc = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::lang::XMultiServiceFactory.java_class, @doc)
+      xMSFDoc = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::lang::XMultiServiceFactory.java_class, @doc)
       oGraphic = xMSFDoc.createInstance("com.sun.star.text.TextGraphicObject")
 
       xPropSet = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::beans::XPropertySet.java_class, oGraphic)
@@ -66,9 +66,9 @@ module JunoDoc
 
       propertyValues[1] = Java::com::sun::star::beans::PropertyValue.new
       propertyValues[1].Name = "FilterName"
-      propertyValues[1].Value = "doc"
+      propertyValues[1].Value = "swriter: MS Word 97"
 
-      sStoreUrl = "file://#{path}.doc"
+      sStoreUrl = "file://#{path}"
       @stored_document.storeAsURL(sStoreUrl, propertyValues)
     end
 

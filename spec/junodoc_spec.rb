@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require 'lib/junodoc.rb'
+require 'lib/junodoc'
 
 describe JunoDoc::Document do
   before do
@@ -31,15 +31,15 @@ describe JunoDoc::Document do
   it "should be able to add an image by url" do
     @junodoc.add_text("istanbul, not constantinople")
     @junodoc.add_paragraph_break
-    @junodoc.add_image('http://whoahbot.com/images/octocat.png')
+    @junodoc.add_image("file://#{Dir.pwd}spec/fixtures/image.jpg")
     @junodoc.close_document
   end
 
   it "should be able to write out the document to disk" do
     @junodoc.add_text("istanbul, not constantinople")
     @junodoc.add_paragraph_break
-    @junodoc.add_image('http://whoahbot.com/images/octocat.png')
-    @junodoc.write_document(Dir.pwd + '/test.doc')
+    @junodoc.add_image("file://#{Dir.pwd}/spec/fixtures/image.jpg")
+    @junodoc.write_document(Dir.pwd + '/spec/output/test.doc')
     @junodoc.close_document
   end
 end
