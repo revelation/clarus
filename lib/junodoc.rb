@@ -18,7 +18,7 @@ module JunoDoc
 
     def initialize
       @context = create_context
-      @doc = open_writer(@context)
+      @doc = open_writer
       @stored_document = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::frame::XStorable.java_class, @doc)
       @document_text = @doc.getText
       @cursor = @document_text.createTextCursor
@@ -34,6 +34,8 @@ module JunoDoc
 
       xPropSet = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::beans::XPropertySet.java_class, oGraphic)
       xPropSet.setPropertyValue("GraphicURL", image_url)
+      xPropSet.setPropertyValue("Height", 4000.to_java(:int))
+      xPropSet.setPropertyValue("Width", 5000.to_java(:int))
 
       xTextContent = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::text::XTextContent.java_class, oGraphic)
       @document_text.insertTextContent(@cursor, xTextContent, true);
@@ -47,15 +49,13 @@ module JunoDoc
       com::sun::star::comp::helper::Bootstrap.bootstrap()
     end
 
-    def open_writer(context)
-      xMCF = context.getServiceManager();
-      oDesktop = xMCF.createInstanceWithContext("com.sun.star.frame.Desktop", context);
+    def open_writer
+      xMCF = @context.getServiceManager()
+      oDesktop = xMCF.createInstanceWithContext("com.sun.star.frame.Desktop", @context)
       xCLoader = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::frame::XComponentLoader.java_class, oDesktop)
-      # This is creating a new java array
       szEmptyArgs = Java::com.sun.star.beans.PropertyValue[0].new
       xComp = xCLoader.loadComponentFromURL("private:factory/swriter", "_blank", 0, szEmptyArgs)
-      xDoc = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::text::XTextDocument.java_class, xComp)
-      return xDoc
+      com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::text::XTextDocument.java_class, xComp)
     end
 
     def write_document(path)

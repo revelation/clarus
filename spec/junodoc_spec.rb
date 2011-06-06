@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'lib/junodoc'
+require File.dirname(__FILE__) + "/spec_helper"
 
 describe JunoDoc::Document do
   before do
@@ -31,7 +30,7 @@ describe JunoDoc::Document do
   it "should be able to add an image by url" do
     @junodoc.add_text("istanbul, not constantinople")
     @junodoc.add_paragraph_break
-    @junodoc.add_image("file://#{Dir.pwd}spec/fixtures/image.jpg")
+    @junodoc.add_image("file://#{Dir.pwd}/spec/fixtures/image.jpg")
     @junodoc.close_document
   end
 
