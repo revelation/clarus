@@ -3,4 +3,4 @@
 Gemfile.lock
 pkg/*
 *.swp
-spec/output/test.doc
+spec/output/*
