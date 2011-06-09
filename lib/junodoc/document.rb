@@ -1,6 +1,5 @@
 module JunoDoc
   class Document
-
     attr_accessor :name
 
     def initialize
@@ -39,19 +38,6 @@ module JunoDoc
       @document_text.insertControlCharacter(@cursor, com::sun::star::text::ControlCharacter.PARAGRAPH_BREAK, false)
     end
 
-    def create_context
-      com::sun::star::comp::helper::Bootstrap.bootstrap()
-    end
-
-    def open_writer
-      xMCF = @context.getServiceManager()
-      oDesktop = xMCF.createInstanceWithContext("com.sun.star.frame.Desktop", @context)
-      xCLoader = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::frame::XComponentLoader.java_class, oDesktop)
-      szEmptyArgs = Java::com.sun.star.beans.PropertyValue[0].new
-      xComp = xCLoader.loadComponentFromURL("private:factory/swriter", "_blank", 0, szEmptyArgs)
-      com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::text::XTextDocument.java_class, xComp)
-    end
-
     def write_document(path)
       propertyValues = Java::com::sun::star::beans::PropertyValue[2].new
       propertyValues[0] = Java::com::sun::star::beans::PropertyValue.new
@@ -67,8 +53,23 @@ module JunoDoc
     end
 
     def close_document
-      xCloseable = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::util::XCloseable.java_class, @stored_document);
-      xCloseable.close(false);
+      xCloseable = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::util::XCloseable.java_class, @stored_document)
+      xCloseable.close(false)
     end
+
+    private
+    def create_context
+      com::sun::star::comp::helper::Bootstrap.bootstrap()
+    end
+
+    def open_writer
+      xMCF = @context.getServiceManager()
+      oDesktop = xMCF.createInstanceWithContext("com.sun.star.frame.Desktop", @context)
+      xCLoader = com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::frame::XComponentLoader.java_class, oDesktop)
+      szEmptyArgs = Java::com.sun.star.beans.PropertyValue[0].new
+      xComp = xCLoader.loadComponentFromURL("private:factory/swriter", "_blank", 0, szEmptyArgs)
+      com::sun::star::uno::UnoRuntime.queryInterface(com::sun::star::text::XTextDocument.java_class, xComp)
+    end
+
   end
 end
