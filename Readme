@@ -4,7 +4,6 @@ This is a jruby library to test the feasibility of using the UNO Java API to gen
 
 TODO:
 
-- Provide an easy way to configure the path for OpenOffice
 - Close the server when finished
 - Fix the server to start without registration wizard
 - Embed images within the document

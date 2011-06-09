@@ -11,4 +11,5 @@ end
 
 #task :default do
 #  `JAVA_OPTS="-d32" bundle exec ruby ./spec/junodoc_spec.rb`
+#  `JAVA_OPTS="-d32" rake test`
 #end

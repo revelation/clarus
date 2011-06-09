@@ -13,7 +13,7 @@ describe JunoDoc do
         config.class_path << '/duh/buh/fuh'
       end
 
-      JunoDoc.configuration[:class_path].must_equal ['/duh/buh/fuh']
+      JunoDoc.configuration[:class_path].must_include '/duh/buh/fuh'
     end
   end
 end
