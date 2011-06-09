@@ -5,7 +5,7 @@ require 'bundler'
 Bundler.setup
 
 Rake::TestTask.new do |t|
-  ENV['JAVA_OPTS'] = "-d32"
+  #ENV['JAVA_OPTS'] = "-d32"
   t.pattern = "spec/*_spec.rb"
 end
 

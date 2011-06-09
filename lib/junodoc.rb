@@ -1,7 +1,7 @@
+require 'java'
 require 'junodoc/version'
 require 'junodoc/configuration'
 require 'junodoc/document'
-require 'java'
 
 module JunoDoc
   class << self
