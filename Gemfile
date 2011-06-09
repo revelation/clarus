@@ -5,3 +5,7 @@ gemspec
 
 gem 'rake'
 gem 'minitest'
+
+group :development do
+  gem 'jruby-openssl'
+end
