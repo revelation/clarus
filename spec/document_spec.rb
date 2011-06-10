@@ -3,15 +3,10 @@ require File.dirname(__FILE__) + "/spec_helper"
 describe JunoDoc::Document do
   before do
     @junodoc = JunoDoc::Document.new
-    @junodoc.name = "what's_up.doc"
   end
 
   it "should be an instance of JunoDoc::Document" do
     @junodoc.class.must_equal(JunoDoc::Document)
-  end
-
-  it "should be able to set the name of the document" do
-    @junodoc.name.must_equal("what's_up.doc")
   end
 
   it "should be able to add text to the document" do
@@ -33,6 +28,9 @@ describe JunoDoc::Document do
     @junodoc.add_text("istanbul, not constantinople")
     @junodoc.add_paragraph_break
     @junodoc.add_image("file://#{Dir.pwd}/spec/fixtures/image.jpg")
-    @junodoc.write_document(Dir.pwd + '/spec/output/')
+    full_file_path = Dir.pwd + '/spec/output/test.doc'
+    @junodoc.write_document(full_file_path)
+    File.exists?(full_file_path).must_equal true
+    File.unlink(full_file_path)
   end
 end

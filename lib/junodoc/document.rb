@@ -1,6 +1,6 @@
 module JunoDoc
-  require 'jars/j2w-ejb-2.0_2011Jun06'
-  require 'jars/xstream-1.3.1'
+  require File.dirname(__FILE__) + '/../../jars/j2w-ejb-2.0_2011Jun06'
+  require File.dirname(__FILE__) + '/../../jars/xstream-1.3.1'
 
   class Document
     import 'java.io.PrintWriter'
@@ -13,8 +13,6 @@ module JunoDoc
     import 'word.w2004.elements.ImageLocation'
     import 'word.w2004.elements.Paragraph'
     import 'word.w2004.elements.Table'
-
-    attr_accessor :name
 
     def initialize
       @doc = create_document
@@ -34,7 +32,7 @@ module JunoDoc
     end
 
     def write_document(path)
-      writer = PrintWriter.new(File.new(path + @name))
+      writer = PrintWriter.new(File.new(path))
       writer.println(@doc.getContent)
       writer.close
     end
