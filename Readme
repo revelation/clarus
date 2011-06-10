@@ -1,6 +1,6 @@
 JunoDoc - a jRuby interface to OpenOffice.org's UNO interface.
 
-This is a jruby library to test the feasibility of using the UNO Java API to generate documents programmatically.
+This is a jruby gem to provide a programatic way to create word documents using jruby
 
 TODO:
 

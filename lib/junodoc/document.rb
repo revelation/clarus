@@ -34,9 +34,13 @@ module JunoDoc
     end
 
     def write_document(path)
-      writer = PrintWriter.new(File.new(path + ))
-      writer.println(@doc.getContent())
+      writer = PrintWriter.new(File.new(path + @name))
+      writer.println(@doc.getContent)
       writer.close
+    end
+
+    def stream_document
+      @doc.getContent
     end
 
     private

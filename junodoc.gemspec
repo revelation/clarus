@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Dan Herrera"]
   s.email       = ["dan@revelationglobal.com"]
   s.homepage    = ""
-  s.summary     = %q{JunoDoc is a jRuby wrapper to the OpenOffice UNO API}
-  s.description = %q{JunoDoc makes it easier to work with the OpenOffice API to create word97 compatible documents.}
+  s.summary     = %q{JunoDoc is a jRuby wrapper to the java2word java library}
+  s.description = %q{JunoDoc makes a ruby wrapper around the java2word library to create word compatible documents.}
 
   s.rubyforge_project = "junodoc"
 

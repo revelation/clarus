@@ -3,6 +3,7 @@ require File.dirname(__FILE__) + "/spec_helper"
 describe JunoDoc::Document do
   before do
     @junodoc = JunoDoc::Document.new
+    @junodoc.name = "what's_up.doc"
   end
 
   it "should be an instance of JunoDoc::Document" do
@@ -10,7 +11,6 @@ describe JunoDoc::Document do
   end
 
   it "should be able to set the name of the document" do
-    @junodoc.name = "what's_up.doc"
     @junodoc.name.must_equal("what's_up.doc")
   end
 
