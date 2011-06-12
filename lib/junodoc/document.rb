@@ -35,6 +35,7 @@ module JunoDoc
       writer = PrintWriter.new(File.new(path))
       writer.println(@doc.getContent)
       writer.close
+      @doc = nil
     end
 
     def stream_document

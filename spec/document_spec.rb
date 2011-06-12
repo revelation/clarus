@@ -18,7 +18,6 @@ describe JunoDoc::Document do
     @junodoc.add_text("istanbul, not constantinople")
     @junodoc.add_paragraph_break
     @junodoc.add_text("istanbul, not constantinople")
-    @junodoc.write_document(Dir.pwd + '/spec/fixtures/add_paragraph_break.doc')
     @junodoc.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_paragraph_break.doc').strip
   end
 
@@ -26,7 +25,7 @@ describe JunoDoc::Document do
     @junodoc.add_text("istanbul, not constantinople")
     @junodoc.add_paragraph_break
     @junodoc.add_image("file://#{Dir.pwd}/spec/fixtures/image.jpg")
-    @junodoc.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_image.doc').strip
+    @junodoc.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_image.doc').strip
   end
 
   it "should be able to write out the document to disk" do
