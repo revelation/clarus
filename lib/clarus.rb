@@ -1,9 +1,9 @@
 require 'java'
-require 'junodoc/version'
-require 'junodoc/configuration'
-require 'junodoc/document'
+require 'clarus/version'
+require 'clarus/configuration'
+require 'clarus/document'
 
-module JunoDoc
+module Clarus
   class << self
     attr_accessor :configuration
 

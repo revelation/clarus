@@ -1,4 +1,4 @@
-module JunoDoc
+module Clarus
   require File.dirname(__FILE__) + '/../../jars/j2w-ejb-2.0_2011Jun06'
   require File.dirname(__FILE__) + '/../../jars/xstream-1.3.1'
 

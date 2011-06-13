@@ -1,4 +1,4 @@
-module JunoDoc
+module Clarus
   class Configuration
     attr_accessor :class_path
 

@@ -1,3 +1,3 @@
-module Junodoc
+module Clarus
   VERSION = "0.0.3"
 end
