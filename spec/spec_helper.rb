@@ -1,2 +1,4 @@
 require 'minitest/autorun'
-require 'lib/clarus'
+require 'minitest/pride'
+
+require './lib/clarus'

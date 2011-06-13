@@ -1,6 +1,6 @@
 module Clarus
-  require File.dirname(__FILE__) + '/../../jars/j2w-ejb-2.0_2011Jun06'
-  require File.dirname(__FILE__) + '/../../jars/xstream-1.3.1'
+  require File.expand_path('../../../jars/j2w-ejb-2.0_2011Jun06', __FILE__)
+  require File.expand_path('../../../jars/xstream-1.3.1', __FILE__)
 
   class Document
     import 'java.io.PrintWriter'
