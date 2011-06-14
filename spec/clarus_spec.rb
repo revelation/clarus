@@ -1,4 +1,6 @@
 require File.dirname(__FILE__) + "/spec_helper"
 
-describe Clarus do
+class ClarusTest < MiniTest::Spec
+  describe Clarus do
+  end
 end

@@ -10,5 +10,6 @@ Benchmark.benchmark do |x|
       @clarus.add_image("file://#{Dir.pwd}/spec/fixtures/image.jpg")
     end
     @clarus.write_document(Dir.pwd + '/spec/output/benchmark_test.doc')
+    sleep
   end
 end
