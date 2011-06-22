@@ -40,7 +40,7 @@ module Clarus
       type = elem_hash['type']
       val  = elem_hash['value']
       add_method = "add_#{type}"
-      send(add_method, val)
+      val ? send(add_method, val) : send(add_method)
     end
 
     def add_text(text, style = nil)

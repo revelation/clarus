@@ -79,6 +79,16 @@ class Clarus::DocumentSpec < MiniTest::Spec
         @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_image.doc').strip
       end
 
+      it "should be able to add a paragraph break element" do
+        paragraph_element = {
+          'type' => 'paragraph_break'
+        }
+        @clarus.add_text("istanbul, not constantinople")
+        @clarus.add_element(paragraph_element)
+        @clarus.add_text("istanbul, not constantinople")
+        @clarus.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_paragraph_break.doc').strip
+      end
+
     end
 
     describe '.load_json' do
