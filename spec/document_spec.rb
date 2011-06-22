@@ -22,6 +22,7 @@ class Clarus::DocumentSpec < MiniTest::Spec
       @clarus.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_paragraph_break.doc').strip
     end
 
+
     it "should be able to add an image by url" do
       @clarus.add_text("istanbul, not constantinople")
       @clarus.add_paragraph_break
@@ -29,8 +30,19 @@ class Clarus::DocumentSpec < MiniTest::Spec
       @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_image.doc').strip
     end
 
-    it "should be able to add images from ssl urls" do
-      @clarus.add_image("https://staging.revelationglobal.com/system/uploads/staging/0044/6660/therib.jpg")
+    it "should be able to add a heading" do
+      @clarus.add_heading("She'll be waiting in istanbul")
+      @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_heading.doc').strip
+    end
+
+    it "should be able to add bold text to a paragraph" do
+      @clarus.add_text("If you've a date in constantinople", :bold => true)
+      @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_bolded_text.doc').strip
+    end
+
+    it "should be able to add text to a paragraph that is underlined" do
+      @clarus.add_text("istanbul, not constantinople", :underline => true)
+      @clarus.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_underlined_text.doc').strip
     end
 
     it "should be able to write out the document to disk" do

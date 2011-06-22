@@ -3,28 +3,46 @@ module Clarus
   require File.expand_path('../../../jars/xstream-1.3.1', __FILE__)
 
   class Document
-    import 'java.io.PrintWriter'
-    import 'java.io.File'
-    import 'word.api.interfaces.IDocument'
-    import 'word.w2004.Document2004'
-    import 'word.w2004.elements.BreakLine'
-    import 'word.w2004.elements.Heading1'
-    import 'word.w2004.elements.Image'
-    import 'word.w2004.elements.ImageLocation'
-    import 'word.w2004.elements.Paragraph'
-    import 'word.w2004.elements.Table'
+    java_import 'java.io.PrintWriter'
+    java_import 'java.io.File'
+    java_import 'word.api.interfaces.IDocument'
+    java_import 'word.w2004.Document2004'
+    java_import 'word.w2004.elements.BreakLine'
+    java_import 'word.w2004.elements.Heading1'
+    java_import 'word.w2004.elements.Image'
+    java_import 'word.w2004.elements.ImageLocation'
+    java_import 'word.w2004.elements.Paragraph'
+    java_import 'word.w2004.elements.ParagraphPiece'
+    java_import 'word.w2004.elements.Table'
 
     def initialize
       @doc = create_document
     end
 
-    def add_text(text)
-      @doc.getBody.addEle(Paragraph.new(text))
+    def add_text(text, style = nil)
+      if style
+        if style[:bold]
+          paragraph_piece = Java::word::w2004::elements::ParagraphPiece.new(text)
+          paragraph_piece.withStyle.bold
+          @doc.getBody.addEle(Paragraph.withPieces(paragraph_piece))
+        elsif style[:underline]
+          paragraph_piece = Java::word::w2004::elements::ParagraphPiece.new(text)
+          paragraph_piece.withStyle.underline
+          @doc.getBody.addEle(Paragraph.withPieces(paragraph_piece))
+        end
+      else
+        @doc.getBody.addEle(Paragraph.new(text))
+      end
     end
 
+    def add_heading(text)
+      @doc.getBody.addEle(Heading1.new(text))
+    end
 
     def add_image(image_url)
-      @doc.getBody.addEle(Image.from_WEB_URL(image_url))
+      image = Image.from_WEB_URL(image_url)
+      @doc.getBody.addEle(image)
+      image = nil
     end
 
     def add_paragraph_break
