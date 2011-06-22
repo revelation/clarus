@@ -2,6 +2,11 @@ require File.dirname(__FILE__) + "/spec_helper"
 require 'json'
 
 class Clarus::DocumentSpec < MiniTest::Spec
+
+  def image_fixture_path
+    "file://#{Dir.pwd}/spec/fixtures/image.jpg"
+  end
+
   before do
     @clarus = Clarus::Document.new
   end
@@ -27,7 +32,7 @@ class Clarus::DocumentSpec < MiniTest::Spec
     it "should be able to add an image by url" do
       @clarus.add_text("istanbul, not constantinople")
       @clarus.add_paragraph_break
-      @clarus.add_image("file://#{Dir.pwd}/spec/fixtures/image.jpg")
+      @clarus.add_image(image_fixture_path)
       @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_image.doc').strip
     end
 
@@ -56,33 +61,42 @@ class Clarus::DocumentSpec < MiniTest::Spec
 
     describe '#add_element' do
 
-      it "should add a text node" do
-        text_node = {
+      it "should add a text element" do
+        text_element = {
           'type' => 'text',
-          'content' => 'istanbul, not constantinople'
+          'value' => 'istanbul, not constantinople'
         }
-        @clarus.add_element(text_node)
+        @clarus.add_element(text_element)
         @clarus.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_text.doc').strip
+      end
+
+      it "should add an image element" do
+        image_element = {
+          'type' => 'image',
+          'value' => image_fixture_path
+        }
+        @clarus.add_element(image_element)
+        @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_image.doc').strip
       end
 
     end
 
     describe '.load_json' do
       before do
-        @text_node = {
+        @text_element = {
           'type' => 'text',
-          'content' => 'istanbul, not constantinople'
+          'value' => 'istanbul, not constantinople'
         }
       end
 
       it "should be an instance of Clarus::Document" do
-        json = JSON.generate [@text_node]
+        json = JSON.generate [@text_element]
         clarus = Clarus::Document.load_json(json)
         clarus.class.must_equal(Clarus::Document)
       end
 
       it "should load text content" do
-        json = JSON.generate [@text_node]
+        json = JSON.generate [@text_element]
         clarus = Clarus::Document.load_json(json)
         clarus.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_text.doc').strip
       end

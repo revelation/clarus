@@ -27,7 +27,7 @@ module Clarus
       doc = Document.new
       elements = JSON.parse json_str
       elements.each do |el|
-        doc.add_text(el['content']) if el['type'] == 'text'
+        doc.add_element el
       end
       doc
     end
@@ -37,7 +37,10 @@ module Clarus
     end
 
     def add_element elem_hash
-      add_text(elem_hash['content'])
+      type = elem_hash['type']
+      val  = elem_hash['value']
+      add_method = "add_#{type}"
+      send(add_method, val)
     end
 
     def add_text(text, style = nil)
