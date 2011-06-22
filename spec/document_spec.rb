@@ -54,6 +54,19 @@ class Clarus::DocumentSpec < MiniTest::Spec
       File.unlink(full_file_path)
     end
 
+    describe '#add_element' do
+
+      it "should add a text node" do
+        text_node = {
+          'type' => 'text',
+          'content' => 'istanbul, not constantinople'
+        }
+        @clarus.add_element(text_node)
+        @clarus.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_text.doc').strip
+      end
+
+    end
+
     describe '.load_json' do
       before do
         @text_node = {

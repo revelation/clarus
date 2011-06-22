@@ -17,6 +17,12 @@ module Clarus
     java_import 'word.w2004.elements.ParagraphPiece'
     java_import 'word.w2004.elements.Table'
 
+    ELEMENT_TYPES = [
+      'text',
+      'image',
+      'paragraph_break'
+    ]
+
     def self.load_json json_str
       doc = Document.new
       elements = JSON.parse json_str
@@ -28,6 +34,10 @@ module Clarus
 
     def initialize
       @doc = create_document
+    end
+
+    def add_element elem_hash
+      add_text(elem_hash['content'])
     end
 
     def add_text(text, style = nil)
