@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + "/spec_helper"
+require 'json'
 
 class Clarus::DocumentSpec < MiniTest::Spec
   before do
@@ -52,5 +53,27 @@ class Clarus::DocumentSpec < MiniTest::Spec
       File.exists?(full_file_path).must_equal true
       File.unlink(full_file_path)
     end
+
+    describe '.load_json' do
+      before do
+        @text_node = {
+          'type' => 'text',
+          'content' => 'istanbul, not constantinople'
+        }
+      end
+
+      it "should be an instance of Clarus::Document" do
+        json = JSON.generate [@text_node]
+        clarus = Clarus::Document.load_json(json)
+        clarus.class.must_equal(Clarus::Document)
+      end
+
+      it "should load text content" do
+        json = JSON.generate [@text_node]
+        clarus = Clarus::Document.load_json(json)
+        clarus.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_text.doc').strip
+      end
+    end
+
   end
 end

@@ -1,6 +1,8 @@
+require File.expand_path('../../../jars/j2w-ejb-2.0_2011Jun06', __FILE__)
+require File.expand_path('../../../jars/xstream-1.3.1', __FILE__)
+require 'json'
+
 module Clarus
-  require File.expand_path('../../../jars/j2w-ejb-2.0_2011Jun06', __FILE__)
-  require File.expand_path('../../../jars/xstream-1.3.1', __FILE__)
 
   class Document
     java_import 'java.io.PrintWriter'
@@ -14,6 +16,15 @@ module Clarus
     java_import 'word.w2004.elements.Paragraph'
     java_import 'word.w2004.elements.ParagraphPiece'
     java_import 'word.w2004.elements.Table'
+
+    def self.load_json json_str
+      doc = Document.new
+      elements = JSON.parse json_str
+      elements.each do |el|
+        doc.add_text(el['content']) if el['type'] == 'text'
+      end
+      doc
+    end
 
     def initialize
       @doc = create_document
