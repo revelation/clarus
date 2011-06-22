@@ -4,6 +4,8 @@ require 'json'
 
 module Clarus
 
+  class DocumentError < StandardError; end
+
   class Document
     java_import 'java.io.PrintWriter'
     java_import 'java.io.File'
@@ -39,8 +41,12 @@ module Clarus
     def add_element elem_hash
       type = elem_hash['type']
       val  = elem_hash['value']
-      add_method = "add_#{type}"
-      val ? send(add_method, val) : send(add_method)
+      if ELEMENT_TYPES.include?(type)
+        add_method = "add_#{type}"
+        val ? send(add_method, val) : send(add_method)
+      else
+        raise DocumentError, "Bad element type"
+      end
     end
 
     def add_text(text, style = nil)

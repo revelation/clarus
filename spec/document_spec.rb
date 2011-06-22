@@ -61,6 +61,18 @@ class Clarus::DocumentSpec < MiniTest::Spec
 
     describe '#add_element' do
 
+      it "should only allow valid element types" do
+        bad_el = {
+          'type' => 'EVAL SOME BAD STUFF'
+        }
+        exp = nil
+        begin
+          @clarus.add_element(bad_el)
+        rescue Exception => exp
+        end
+        exp.must_be_instance_of(Clarus::DocumentError)
+      end
+
       it "should add a text element" do
         text_element = {
           'type' => 'text',
