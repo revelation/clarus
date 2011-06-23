@@ -1,9 +1,9 @@
-require File.expand_path('../../../jars/j2w-ejb-2.0_2011Jun06', __FILE__)
-require File.expand_path('../../../jars/xstream-1.3.1', __FILE__)
 require 'json'
 
-module Clarus
+require File.expand_path('../../../jars/j2w-ejb-2.0', __FILE__)
+require File.expand_path('../../../jars/xstream-1.3.1', __FILE__)
 
+module Clarus
   class DocumentError < StandardError; end
 
   class Document
@@ -14,6 +14,7 @@ module Clarus
     java_import 'word.w2004.elements.BreakLine'
     java_import 'word.w2004.elements.Heading1'
     java_import 'word.w2004.elements.Image'
+    java_import 'word.w2004.elements.HyperLink'
     java_import 'word.w2004.elements.ImageLocation'
     java_import 'word.w2004.elements.Paragraph'
     java_import 'word.w2004.elements.ParagraphPiece'
@@ -67,6 +68,10 @@ module Clarus
 
     def add_heading(text)
       @doc.getBody.addEle(Heading1.new(text))
+    end
+
+    def add_hyperlink(uri, title)
+      @doc.getBody.addEle(HyperLink.with(uri, title))
     end
 
     def add_image(image_url)

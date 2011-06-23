@@ -18,22 +18,26 @@ class Clarus::DocumentSpec < MiniTest::Spec
 
     it "should be able to add text to the document" do
       @clarus.add_text("istanbul, not constantinople")
-      @clarus.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_text.doc').strip
+      @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_text.doc').strip
     end
 
     it "should be able to add a paragraph break" do
       @clarus.add_text("istanbul, not constantinople")
       @clarus.add_paragraph_break
       @clarus.add_text("istanbul, not constantinople")
-      @clarus.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_paragraph_break.doc').strip
+      @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_paragraph_break.doc').strip
     end
-
 
     it "should be able to add an image by url" do
       @clarus.add_text("istanbul, not constantinople")
       @clarus.add_paragraph_break
       @clarus.add_image(image_fixture_path)
       @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_image.doc').strip
+    end
+
+    it "should be able to add a hyperlink" do
+      @clarus.add_hyperlink("http://ffffound.com", "FFFFound!")
+      @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_hyperlink.doc').strip
     end
 
     it "should be able to add a heading" do
@@ -48,7 +52,7 @@ class Clarus::DocumentSpec < MiniTest::Spec
 
     it "should be able to add text to a paragraph that is underlined" do
       @clarus.add_text("istanbul, not constantinople", :underline => true)
-      @clarus.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_underlined_text.doc').strip
+      @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_underlined_text.doc').strip
     end
 
     it "should be able to write out the document to disk" do
@@ -79,7 +83,7 @@ class Clarus::DocumentSpec < MiniTest::Spec
           'value' => 'istanbul, not constantinople'
         }
         @clarus.add_element(text_element)
-        @clarus.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_text.doc').strip
+        @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_text.doc').strip
       end
 
       it "should add an image element" do
@@ -98,7 +102,7 @@ class Clarus::DocumentSpec < MiniTest::Spec
         @clarus.add_text("istanbul, not constantinople")
         @clarus.add_element(paragraph_element)
         @clarus.add_text("istanbul, not constantinople")
-        @clarus.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_paragraph_break.doc').strip
+        @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_paragraph_break.doc').strip
       end
 
     end
@@ -120,7 +124,7 @@ class Clarus::DocumentSpec < MiniTest::Spec
       it "should load text content" do
         json = JSON.generate [@text_element]
         clarus = Clarus::Document.load_json(json)
-        clarus.stream_document.must_equal File.read(Dir.pwd + '/spec/fixtures/add_text.doc').strip
+        clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_text.doc').strip
       end
     end
 
