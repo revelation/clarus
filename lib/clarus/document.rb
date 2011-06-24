@@ -3,6 +3,8 @@ require 'json'
 require File.expand_path('../../../jars/j2w-ejb-2.0', __FILE__)
 require File.expand_path('../../../jars/xstream-1.3.1', __FILE__)
 
+require File.expand_path('../paragraph_fragment', __FILE__)
+
 module Clarus
   class DocumentError < StandardError; end
 
@@ -50,20 +52,14 @@ module Clarus
       end
     end
 
-    def add_text(text, style = nil)
-      if style
-        if style[:bold]
-          paragraph_piece = Java::word::w2004::elements::ParagraphPiece.new(text)
-          paragraph_piece.withStyle.bold
-          @doc.getBody.addEle(Paragraph.withPieces(paragraph_piece))
-        elsif style[:underline]
-          paragraph_piece = Java::word::w2004::elements::ParagraphPiece.new(text)
-          paragraph_piece.withStyle.underline
-          @doc.getBody.addEle(Paragraph.withPieces(paragraph_piece))
-        end
-      else
-        @doc.getBody.addEle(Paragraph.new(text))
-      end
+    def paragraph
+      new_paragraph = Clarus::ParagraphFragment.new
+      yield(new_paragraph)
+      @doc.getBody.addEle(new_paragraph.finished_paragraph)
+    end
+
+    def add_text(text)
+      @doc.getBody.addEle(Paragraph.new(text))
     end
 
     def add_heading(text)

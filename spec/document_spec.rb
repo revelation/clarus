@@ -12,24 +12,56 @@ class Clarus::DocumentSpec < MiniTest::Spec
   end
 
   describe Clarus::Document do
+    describe "paragraphs" do
+      it "should allow a block syntax for adding elements to a paragraph" do
+        @clarus.paragraph do |p|
+          p.add_text("If you've a date in constantinople", :bold)
+          p.add_text("She'll be waiting in istanbul", :underline)
+        end
+        @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/mixed_paragraph_text.doc').strip
+      end
+
+      it "should be able to add bold text to a paragraph" do
+        @clarus.paragraph do |p|
+          p.add_text("If you've a date in constantinople", :bold)
+        end
+        @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_bolded_text.doc').strip
+      end
+
+      it "should be able to add text to a paragraph that is underlined" do
+        @clarus.paragraph do |p|
+          p.add_text("istanbul, not constantinople", :underline)
+        end
+        @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_underlined_text.doc').strip
+      end
+    end
+
     it "should be an instance of Clarus::Document" do
       @clarus.class.must_equal(Clarus::Document)
     end
 
     it "should be able to add text to the document" do
-      @clarus.add_text("istanbul, not constantinople")
+      @clarus.paragraph do |p|
+        p.add_text("istanbul, not constantinople")
+      end
       @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_text.doc').strip
     end
 
     it "should be able to add a paragraph break" do
-      @clarus.add_text("istanbul, not constantinople")
+      @clarus.paragraph do |p|
+        p.add_text("istanbul, not constantinople")
+      end
       @clarus.add_paragraph_break
-      @clarus.add_text("istanbul, not constantinople")
+      @clarus.paragraph do |p|
+        p.add_text("istanbul, not constantinople")
+      end
       @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_paragraph_break.doc').strip
     end
 
     it "should be able to add an image by url" do
-      @clarus.add_text("istanbul, not constantinople")
+      @clarus.paragraph do |p|
+        p.add_text("istanbul, not constantinople")
+      end
       @clarus.add_paragraph_break
       @clarus.add_image(image_fixture_path)
       @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_image.doc').strip
@@ -45,18 +77,10 @@ class Clarus::DocumentSpec < MiniTest::Spec
       @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_heading.doc').strip
     end
 
-    it "should be able to add bold text to a paragraph" do
-      @clarus.add_text("If you've a date in constantinople", :bold => true)
-      @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_bolded_text.doc').strip
-    end
-
-    it "should be able to add text to a paragraph that is underlined" do
-      @clarus.add_text("istanbul, not constantinople", :underline => true)
-      @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_underlined_text.doc').strip
-    end
-
     it "should be able to write out the document to disk" do
-      @clarus.add_text("istanbul, not constantinople")
+      @clarus.paragraph do |p|
+        p.add_text("istanbul, not constantinople")
+      end
       full_file_path = Dir.pwd + '/spec/output/test.doc'
       @clarus.write_document(full_file_path)
       File.exists?(full_file_path).must_equal true
@@ -64,7 +88,6 @@ class Clarus::DocumentSpec < MiniTest::Spec
     end
 
     describe '#add_element' do
-
       it "should only allow valid element types" do
         bad_el = {
           'type' => 'EVAL SOME BAD STUFF'
