@@ -15,8 +15,8 @@ class Clarus::DocumentSpec < MiniTest::Spec
     describe "paragraphs" do
       it "should allow a block syntax for adding elements to a paragraph" do
         @clarus.paragraph do |p|
-          p.add_text("If you've a date in constantinople", :bold)
-          p.add_text("She'll be waiting in istanbul", :underline)
+          p.add_text("If you've a date in constantinople, ", :bold)
+          p.add_text("She'll be waiting in istanbul.", :underline)
         end
         @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/mixed_paragraph_text.doc').strip
       end
@@ -33,6 +33,22 @@ class Clarus::DocumentSpec < MiniTest::Spec
           p.add_text("istanbul, not constantinople", :underline)
         end
         @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/add_underlined_text.doc').strip
+      end
+
+      it "should be able to indent a paragraph" do
+        @clarus.paragraph(:indent => 1) do |p|
+          p.add_text("istanbul, not constantinople", :underline)
+        end
+
+        @clarus.paragraph(:indent => 2) do |p|
+          p.add_text("istanbul, not constantinople", :bold)
+        end
+
+        @clarus.paragraph(:indent => 3) do |p|
+          p.add_text("Why did constantinople get the works?")
+        end
+
+        @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/fixtures/indent.doc').strip
       end
     end
 

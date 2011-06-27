@@ -12,7 +12,7 @@
 		
   <w:pPr>  <w:jc w:val="left"/> 
            
-     <w:ind w:left="0"/>
+     <w:ind w:left="540"/>
            
    
      </w:pPr>
@@ -20,16 +20,17 @@
 		
 		<w:r>
 			
+	 <w:rPr>
+			<w:u w:val="single"/>
+	 </w:rPr>
 			<w:t>istanbul, not constantinople</w:t>
 		</w:r>
 	</w:p>
-
-<w:p wsp:rsidR="008979E8" wsp:rsidRDefault="008979E8"/>
 	<w:p wsp:rsidR="008979E8" wsp:rsidRDefault="00000000">
 		
   <w:pPr>  <w:jc w:val="left"/> 
            
-     <w:ind w:left="0"/>
+     <w:ind w:left="1080"/>
            
    
      </w:pPr>
@@ -37,7 +38,25 @@
 		
 		<w:r>
 			
+	 <w:rPr>
+            	<w:b/>
+	 </w:rPr>
 			<w:t>istanbul, not constantinople</w:t>
+		</w:r>
+	</w:p>
+	<w:p wsp:rsidR="008979E8" wsp:rsidRDefault="00000000">
+		
+  <w:pPr>  <w:jc w:val="left"/> 
+           
+     <w:ind w:left="1620"/>
+           
+   
+     </w:pPr>
+		
+		
+		<w:r>
+			
+			<w:t>Why did constantinople get the works?</w:t>
 		</w:r>
 	</w:p>
 </w:body>

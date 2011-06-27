@@ -5,6 +5,7 @@ require File.expand_path('../../../jars/xstream-1.3.1', __FILE__)
 
 require File.expand_path('../paragraph_fragment', __FILE__)
 
+
 module Clarus
   class DocumentError < StandardError; end
 
@@ -21,11 +22,19 @@ module Clarus
     java_import 'word.w2004.elements.Paragraph'
     java_import 'word.w2004.elements.ParagraphPiece'
     java_import 'word.w2004.elements.Table'
+    java_import 'word.w2004.style.ParagraphStyle'
 
     ELEMENT_TYPES = [
       'text',
       'image',
       'paragraph_break'
+    ]
+
+    PARAGRAPH_INDENT = [
+      nil,
+      ParagraphStyle::Indent::ONE,
+      ParagraphStyle::Indent::TWO,
+      ParagraphStyle::Indent::THREE,
     ]
 
     def self.load_json json_str
@@ -52,10 +61,15 @@ module Clarus
       end
     end
 
-    def paragraph
+    def paragraph(options = {})
       new_paragraph = Clarus::ParagraphFragment.new
       yield(new_paragraph)
-      @doc.getBody.addEle(new_paragraph.finished_paragraph)
+      if options[:indent]
+        finished_paragraph = new_paragraph.finished_paragraph.withStyle().indent(PARAGRAPH_INDENT[options[:indent]]).create()
+      else
+        finished_paragraph = new_paragraph.finished_paragraph
+      end
+      @doc.getBody.addEle(finished_paragraph)
     end
 
     def add_text(text)
