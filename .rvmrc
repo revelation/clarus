@@ -1,1 +1,1 @@
-rvm use jruby-1.6.2@clarus
+rvm use ruby-1.9.2-p180@clarus
