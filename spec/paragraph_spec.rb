@@ -33,11 +33,6 @@ class Clarus::ParagraphSpec < MiniTest::Spec
       @paragraph.render.must_match File.read(Dir.pwd + '/spec/output/indent.doc').strip
     end
 
-    it "should be able to add an image by url" do
-      @paragraph.add_image(image_fixture_path)
-      @paragraph.render.must_match File.read(Dir.pwd + '/spec/output/add_image.doc').strip
-    end
-
     it "should be able to add a hyperlink" do
       @paragraph.add_hyperlink("http://ffffound.com", "FFFFound!")
       @paragraph.render.must_match File.read(Dir.pwd + '/spec/output/add_hyperlink.doc').strip

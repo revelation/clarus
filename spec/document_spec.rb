@@ -1,10 +1,6 @@
 require File.dirname(__FILE__) + "/spec_helper"
+
 class Clarus::DocumentSpec < MiniTest::Spec
-
-  def image_fixture_path
-    "file://#{Dir.pwd}/spec/fixtures/image.jpg"
-  end
-
   describe Clarus::Document do
     before do
       @clarus = Clarus::Document.new
@@ -23,7 +19,7 @@ class Clarus::DocumentSpec < MiniTest::Spec
         @clarus.new_paragraph do |p|
           p.add_text("istanbul, not constantinople")
         end
-        @clarus.add_paragraph_break
+        @clarus.paragraph_break
         @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/output/add_paragraph_break.doc').strip
       end
     end

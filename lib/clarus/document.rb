@@ -1,7 +1,5 @@
 module Clarus
   class Document
-    attr_accessor :items
-
     def initialize
       @doc = create_document
       @items = []
@@ -24,8 +22,12 @@ module Clarus
       @items << Clarus::ParagraphBreak.new
     end
 
+    def image(uri)
+      @items << Clarus::Image.new
+    end
+
     def stream_document
-      @doc.result(binding)
+      @doc.result(:items => @items)
     end
 
     private
