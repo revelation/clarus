@@ -6,23 +6,9 @@ module Clarus
       @doc = create_document
     end
 
-    def paragraph
-      document_template = File.read(File.expand_path('../templates/paragraph_fragment_template.erb', __FILE__))
-      Erubis::Eruby.new(document_template).result({}) do
-        yield(self)
-      end
-    end
-
-    def add_text(text, style = nil)
-      finished_text = ""
-      if style == :bold
-        finished_text.concat "<w:b/>\n"
-      elsif style == :underline
-        finished_text.concat "<w:u/>\n"
-      elsif style == :italic
-        finished_text.concat "<w:i/>\n"
-      end
-      finished_text.concat "<w:t>#{text}</w:t>\n"
+    def new_paragraph
+      new_paragraph = Clarus::Paragraph.new
+      yield(new_paragraph)
     end
 
     def add_heading(text)
