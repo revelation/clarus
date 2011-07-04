@@ -16,7 +16,21 @@ module Clarus
       @finished_text.concat "<w:t>#{text}</w:t>\n"
     end
 
-    def finished_paragraph(indent = nil)
+    def indent(depth)
+    end
+
+    def add_heading(text)
+      @style = '<w:pStyle w:val="Heading1" />'
+      add_text(text)
+    end
+
+    def add_hyperlink(uri, title)
+    end
+
+    def add_image(image_url)
+    end
+
+    def render
       document_template = File.read(File.expand_path('../templates/paragraph_fragment_template.erb', __FILE__))
       Erubis::Eruby.new(document_template).result(:style => @style, :finished_text => @finished_text)
     end

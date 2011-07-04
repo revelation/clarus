@@ -1,44 +1,31 @@
 module Clarus
-  class DocumentError < StandardError; end
-
   class Document
+    attr_accessor :items
+
     def initialize
       @doc = create_document
+      @items = []
     end
 
     def new_paragraph
       new_paragraph = Clarus::Paragraph.new
       yield(new_paragraph)
-    end
-
-    def add_heading(text)
-      @style = '<w:pStyle w:val="Heading1" />'
-      add_text(text)
-    end
-
-    def add_hyperlink(uri, title)
-    end
-
-    def add_image(image_url)
-    end
-
-    def add_paragraph_break
-      "<w:p/>"
+      @items << new_paragraph
     end
 
     def write_document(path)
-      yield(self)
       File.open(path, "w") do |f|
-        @doc.result(binding.self) do
-          f.write(result)
-        end
+        result = stream_document
+        f.write(result)
       end
     end
 
+    def paragraph_break
+      @items << Clarus::ParagraphBreak.new
+    end
+
     def stream_document
-      @doc.result({}) do
-        yield(self)
-      end
+      @doc.result(binding)
     end
 
     private

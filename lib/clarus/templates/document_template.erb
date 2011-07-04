@@ -421,6 +421,8 @@
     </w:compat>
   </w:docPr>
   <w:body>
-    <%= yield %>
+    <% items.each do |item| %>
+      <%= item.render %>
+    <% end %>
   </w:body>
 </w:wordDocument>
