@@ -16,14 +16,18 @@ module Clarus
     def add_text(text, style = nil)
       finished_text = ""
       if style == :bold
-        finished_text << "<w:b/>\n"
+        finished_text.concat "<w:b/>\n"
+      elsif style == :underline
+        finished_text.concat "<w:u/>\n"
       elsif style == :italic
-        finished_text << "<w:i/>\n"
+        finished_text.concat "<w:i/>\n"
       end
-      finished_text << "<w:t>#{text}</w:t>"
+      finished_text.concat "<w:t>#{text}</w:t>\n"
     end
 
     def add_heading(text)
+      @style = '<w:pStyle w:val="Heading1" />'
+      add_text(text)
     end
 
     def add_hyperlink(uri, title)
@@ -33,14 +37,15 @@ module Clarus
     end
 
     def add_paragraph_break
+      "<w:p/>"
     end
 
     def write_document(path)
-      result = @doc.result({}) do
-        yield(self)
-      end
+      yield(self)
       File.open(path, "w") do |f|
-        f.write(result)
+        @doc.result(binding.self) do
+          f.write(result)
+        end
       end
     end
 
