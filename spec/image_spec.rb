@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + "/spec_helper"
 class Clarus::ImageSpec < MiniTest::Spec
   describe Clarus::Image do
     before do
-      @image = Clarus::Image.new(File.expand_path('../fixtures/image.jpg', __FILE__))
+      @image = Clarus::Image.new("file://#{Dir.pwd}/spec/fixtures/image.jpg")
     end
 
     it "should return the image base64 encoded" do
