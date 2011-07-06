@@ -23,7 +23,7 @@ module Clarus
     end
 
     def image(uri)
-      @items << Clarus::Image.new
+      @items << Clarus::Image.new(uri)
     end
 
     def stream_document

@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'base64'
 
 module Clarus
   class Image
@@ -7,7 +8,7 @@ module Clarus
     end
 
     def image_blob
-      open(@image_path).read
+      Base64.encode64(open(@image_path).read)
     end
 
     def render
