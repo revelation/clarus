@@ -1,23 +1,23 @@
-<v:shapetype id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
-  <v:stroke joinstyle="miter"/>
-	<v:formulas>
-		<v:f eqn="if lineDrawn pixelLineWidth 0"/>
-		<v:f eqn="sum @0 1 0"/><v:f eqn="sum 0 0 @1"/>
-		<v:f eqn="prod @2 1 2"/>
-		<v:f eqn="prod @3 21600 pixelWidth"/>
-		<v:f eqn="prod @3 21600 pixelHeight"/>
-		<v:f eqn="sum @0 0 1"/>
-		<v:f eqn="prod @6 1 2"/>
-		<v:f eqn="prod @7 21600 pixelWidth"/>
-		<v:f eqn="sum @8 21600 0"/>
-		<v:f eqn="prod @7 21600 pixelHeight"/>
-		<v:f eqn="sum @10 21600 0"/>"
-	</v:formulas>
-	<v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
-	<o:lock v:ext="edit" aspectratio="t"/>"
-</v:shapetype>"
-  <w:binData w:name="wordml://<%= wordml_filename %>" xml:space="preserve">
-    <%= bindata %>
-  </w:binData>
-  <v:shape id="_x0000_i1026" type="#_x0000_t75" style="width:<%= width %>pt;height:<%=height %>pt"><v:imagedata src="wordml://<%= wordml_filename%>" o:title="<%= file_name %>"/>
+<w:pict>
+  <v:shapetype id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+    <v:stroke joinstyle="miter"/>
+    <v:formulas>
+      <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+      <v:f eqn="sum @0 1 0"/><v:f eqn="sum 0 0 @1"/>
+      <v:f eqn="prod @2 1 2"/>
+      <v:f eqn="prod @3 21600 pixelWidth"/>
+      <v:f eqn="prod @3 21600 pixelHeight"/>
+      <v:f eqn="sum @0 0 1"/>
+      <v:f eqn="prod @6 1 2"/>
+      <v:f eqn="prod @7 21600 pixelWidth"/>
+      <v:f eqn="sum @8 21600 0"/>
+      <v:f eqn="prod @7 21600 pixelHeight"/>
+      <v:f eqn="sum @10 21600 0"/>"
+    </v:formulas>
+    <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+    <o:lock v:ext="edit" aspectratio="t"/>"
+  </v:shapetype>
+  <w:binData w:name="<%= wordml_filename %>" xml:space="preserve"><%= bindata %></w:binData>
+  <v:shape id="_x0000_i1026" type="#_x0000_t75" style="width:457pt;height:191pt"><v:imagedata src="<%= wordml_filename %>" o:title="<%= filename %>"/>
+  </v:shape>
 </w:pict>

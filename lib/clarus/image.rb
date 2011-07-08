@@ -13,12 +13,14 @@ module Clarus
 
     def render
       document_template = File.read(File.expand_path('../templates/image_template.erb', __FILE__))
+      filename = File.basename(@image_path)
+      wordml_filename = "wordml://#{Time.now.to_i}#{filename}"
       Erubis::Eruby.new(document_template).result(
-        :wordml_filename => nil,
-        :width => nil,
-        :height => nil,
-        :file_name => nil,
-        :bindata => nil
+        :wordml_filename => wordml_filename,
+        :width => 600,
+        :height => 400,
+        :filename => filename,
+        :bindata => image_blob
       )
     end
   end
