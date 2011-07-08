@@ -24,6 +24,13 @@ class Clarus::DocumentSpec < MiniTest::Spec
       end
     end
 
+    describe "#image" do
+      it "should add an image to the document" do
+        @clarus.image("https://encrypted.google.com/images/logos/ssl_ps_logo.png")
+        @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/output/add_image.doc').strip
+      end
+    end
+
     describe 'writing to file or stdout' do
       it "should stream out the document as text" do
         @clarus.new_paragraph do |p|
