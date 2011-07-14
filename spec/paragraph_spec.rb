@@ -32,10 +32,5 @@ class Clarus::ParagraphSpec < MiniTest::Spec
       @paragraph.add_text("Why did constantinople get the works?")
       @paragraph.render.must_match File.read(Dir.pwd + '/spec/output/indent.doc').strip
     end
-
-    it "should be able to add a hyperlink" do
-      @paragraph.add_hyperlink("http://ffffound.com", "FFFFound!")
-      @paragraph.render.must_match File.read(Dir.pwd + '/spec/output/add_hyperlink.doc').strip
-    end
   end
 end

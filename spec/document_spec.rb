@@ -31,6 +31,13 @@ class Clarus::DocumentSpec < MiniTest::Spec
       end
     end
 
+    describe "#link" do
+      it "should be able to add a link to the document" do
+        @clarus.link("http://ffffound.com", "FFFFound!")
+        @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/output/add_link.doc').strip
+      end
+    end
+
     describe 'writing to file or stdout' do
       it "should stream out the document as text" do
         @clarus.new_paragraph do |p|

@@ -23,12 +23,6 @@ module Clarus
       @indent = INDENT_CONSTANT * depth
     end
 
-    def add_hyperlink(uri, title)
-    end
-
-    def add_image(image_url)
-    end
-
     def render
       document_template = File.read(File.expand_path('../templates/paragraph_fragment_template.erb', __FILE__))
       Erubis::Eruby.new(document_template).result(:style => @style,

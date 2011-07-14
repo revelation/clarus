@@ -17,6 +17,10 @@ module Clarus
       @items << heading
     end
 
+    def link(destination, text)
+      @items << Clarus::Link.new(destination, text)
+    end
+
     def write_document(path)
       File.open(path, "w") do |f|
         result = stream_document
