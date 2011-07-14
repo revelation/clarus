@@ -1,9 +1,12 @@
-<w:p>
+<w:p wsp:rsidR="008979E8" wsp:rsidRDefault="00000000">
   <w:pPr>
-    
+    <w:jc w:val="left"/>
+    <w:ind w:left="0"/>
   </w:pPr>
   <w:r>
+    <w:rPr>
+      
+    </w:rPr>
     <w:t>If you've a date in constantinople</w:t>
-
   </w:r>
 </w:p>

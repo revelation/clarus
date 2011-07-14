@@ -5,8 +5,8 @@ module Clarus
       @items = []
     end
 
-    def new_paragraph(indent = nil)
-      paragraph = Clarus::Paragraph.new(indent)
+    def new_paragraph
+      paragraph = Clarus::Paragraph.new
       yield(paragraph)
       @items << paragraph
     end

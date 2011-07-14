@@ -1,7 +1,9 @@
 module Clarus
   class Paragraph
-    def initialize(indent = 0)
-      @indent = indent
+    INDENT_CONSTANT = 540
+
+    def initialize
+      @indent = 0
       @style = ""
       @finished_text = ""
     end
@@ -18,6 +20,7 @@ module Clarus
     end
 
     def indent(depth)
+      @indent = INDENT_CONSTANT * depth
     end
 
     def add_hyperlink(uri, title)

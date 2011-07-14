@@ -37,10 +37,5 @@ class Clarus::ParagraphSpec < MiniTest::Spec
       @paragraph.add_hyperlink("http://ffffound.com", "FFFFound!")
       @paragraph.render.must_match File.read(Dir.pwd + '/spec/output/add_hyperlink.doc').strip
     end
-
-    it "should be able to add a heading" do
-      @paragraph.add_heading("She'll be waiting in istanbul")
-      @paragraph.render.must_match File.read(Dir.pwd + '/spec/output/add_heading.doc').strip
-    end
   end
 end
