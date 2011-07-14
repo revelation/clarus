@@ -1,27 +1,23 @@
 module Clarus
   class Paragraph
-    def initialize
-      @style = nil
+    def initialize(indent = 0)
+      @indent = indent
+      @style = ""
       @finished_text = ""
     end
 
     def add_text(text, text_style = nil)
       if text_style == :bold
-        @finished_text.concat "<w:b/>\n"
+        @style.concat "<w:b/>\n"
       elsif text_style == :underline
-        @finished_text.concat "<w:u/>\n"
+        @style.concat "<w:u/>\n"
       elsif text_style == :italic
-        @finished_text.concat "<w:i/>\n"
+        @style.concat "<w:i/>\n"
       end
-      @finished_text.concat "<w:t>#{text}</w:t>\n"
+      @finished_text.concat text
     end
 
     def indent(depth)
-    end
-
-    def add_heading(text)
-      @style = '<w:pStyle w:val="Heading1" />'
-      add_text(text)
     end
 
     def add_hyperlink(uri, title)
@@ -32,7 +28,9 @@ module Clarus
 
     def render
       document_template = File.read(File.expand_path('../templates/paragraph_fragment_template.erb', __FILE__))
-      Erubis::Eruby.new(document_template).result(:style => @style, :finished_text => @finished_text)
+      Erubis::Eruby.new(document_template).result(:style => @style,
+                                                  :finished_text => @finished_text,
+                                                  :indent => @indent)
     end
   end
 end

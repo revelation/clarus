@@ -5,10 +5,16 @@ module Clarus
       @items = []
     end
 
-    def new_paragraph
-      new_paragraph = Clarus::Paragraph.new
-      yield(new_paragraph)
-      @items << new_paragraph
+    def new_paragraph(indent = nil)
+      paragraph = Clarus::Paragraph.new(indent)
+      yield(paragraph)
+      @items << paragraph
+    end
+
+    def new_heading
+      heading = Clarus::Heading.new
+      yield(heading)
+      @items << heading
     end
 
     def write_document(path)
