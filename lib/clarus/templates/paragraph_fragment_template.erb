@@ -1,12 +1,8 @@
 <w:p wsp:rsidR="008979E8" wsp:rsidRDefault="00000000">
   <w:pPr>
-    <w:jc w:val="left"/>
     <w:ind w:left="<%= indent %>"/>
   </w:pPr>
-  <w:r>
-    <w:rPr>
-      <%= style %>
-    </w:rPr>
-    <w:t><%= finished_text %></w:t>
-  </w:r>
+  <%- items.each do |item| %>
+    <%= item.render %>
+  <%- end %>
 </w:p>

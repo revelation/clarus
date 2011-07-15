@@ -1,13 +1,12 @@
 <w:p wsp:rsidR="008979E8" wsp:rsidRDefault="00000000">
   <w:pPr>
-    <w:jc w:val="left"/>
     <w:ind w:left="0"/>
   </w:pPr>
-  <w:r>
+      <w:r wsp:rsidRPr="00032AFB">
     <w:rPr>
-      <w:u/>
-
+      <w:u w:val="single"/>\n
     </w:rPr>
     <w:t>she'll be waiting in istanbul</w:t>
   </w:r>
+
 </w:p>

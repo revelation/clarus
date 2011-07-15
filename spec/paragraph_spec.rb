@@ -13,7 +13,7 @@ class Clarus::ParagraphSpec < MiniTest::Spec
 
     it "should be able to add bold text to a paragraph" do
       @paragraph.add_text("If you've a date in constantinople", :bold)
-      @paragraph.render.must_match File.read(Dir.pwd + '/spec/output/add_bolded_text.doc').strip
+      @paragraph.render.must_match File.read(Dir.pwd + '/spec/output/add_bold_text.doc').strip
     end
 
     it "should allow a adding multiple elements with different styles to a paragraph" do
@@ -28,9 +28,9 @@ class Clarus::ParagraphSpec < MiniTest::Spec
     end
 
     it "should be able to indent a paragraph" do
-      @paragraph.indent(1)
-      @paragraph.add_text("Why did constantinople get the works?")
-      @paragraph.render.must_match File.read(Dir.pwd + '/spec/output/indent.doc').strip
+      @indented_paragraph = Clarus::Paragraph.new(1)
+      @indented_paragraph.add_text("Why did constantinople get the works?")
+      @indented_paragraph.render.must_match File.read(Dir.pwd + '/spec/output/indent.doc').strip
     end
   end
 end
