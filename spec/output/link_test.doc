@@ -1,10 +1,10 @@
 <w:p wsp:rsidR="0023207C" wsp:rsidRDefault="00A30FBB">
-  <w:hlink w:dest="<%= destination %>">
+  <w:hlink w:dest="http://ffffound.com">
     <w:r wsp:rsidRPr="00A30FBB">
       <w:rPr>
         <w:rStyle w:val="Hyperlink"/>
       </w:rPr>
-      <w:t><%= text %></w:t>
+      <w:t>FFFFound!</w:t>
     </w:r>
   </w:hlink>
 </w:p>

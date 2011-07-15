@@ -10,11 +10,11 @@ module Clarus
 
     def add_text(text, text_style = nil)
       if text_style == :bold
-        @style.concat "<w:b/>\n"
+        @style = "<w:b/>\n"
       elsif text_style == :underline
-        @style.concat "<w:u/>\n"
+        @style = "<w:u/>\n"
       elsif text_style == :italic
-        @style.concat "<w:i/>\n"
+        @style = "<w:i/>\n"
       end
       @finished_text.concat text
     end
