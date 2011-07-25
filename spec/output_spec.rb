@@ -6,6 +6,8 @@ clarus = Clarus::Document.new
 
 clarus.image("https://github.com/revelation/clarus/raw/master/spec/fixtures/ruby_image.jpg")
 
+clarus.paragraph_break
+
 clarus.new_heading do |h|
   h.add_text("1. Opening This Book")
 end

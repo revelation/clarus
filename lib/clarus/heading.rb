@@ -1,7 +1,6 @@
 module Clarus
   class Heading
     def initialize
-      @style = '<w:pStyle w:val="Heading1" />'
       @text = ""
     end
 
@@ -11,7 +10,7 @@ module Clarus
 
     def render
       document_template = File.read(File.expand_path('../templates/header_template.erb', __FILE__))
-      Erubis::Eruby.new(document_template).result(:style => @style, :text => @text)
+      Erubis::Eruby.new(document_template).result(:text => @text)
     end
   end
 end
