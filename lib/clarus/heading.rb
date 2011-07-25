@@ -2,16 +2,16 @@ module Clarus
   class Heading
     def initialize
       @style = '<w:pStyle w:val="Heading1" />'
-      @finished_text = ""
+      @text = ""
     end
 
     def add_text(text)
-      @finished_text.concat "<w:t>#{text}</w:t>\n"
+      @text.concat text
     end
 
     def render
-      document_template = File.read(File.expand_path('../templates/paragraph_fragment_template.erb', __FILE__))
-      Erubis::Eruby.new(document_template).result(:style => @style, :finished_text => @finished_text)
+      document_template = File.read(File.expand_path('../templates/header_template.erb', __FILE__))
+      Erubis::Eruby.new(document_template).result(:style => @style, :text => @text)
     end
   end
 end

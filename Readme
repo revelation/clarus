@@ -1,6 +1,8 @@
-clarus - a jRuby interface to create documents, moof!
+clarus - a ruby interface to create word documents, moof!
 
-This is a gem to provide a programatic way to create word documents using jruby
+This is a gem to provide a programatic way to create word documents using ruby
+
+
 
 LICENSE:
 
