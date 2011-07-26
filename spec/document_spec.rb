@@ -24,6 +24,14 @@ class Clarus::DocumentSpec < MiniTest::Spec
       end
     end
 
+    describe "#text" do
+      it "should be able to add a text block"do
+        text = "damascus, not constantinople"
+        @clarus.text(text)
+        @clarus.stream_document.must_match text
+      end
+    end
+
     describe 'writing to file or stdout' do
       it "should stream out the document as text" do
         @clarus.new_paragraph do |p|

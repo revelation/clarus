@@ -5,6 +5,10 @@ module Clarus
       @items = []
     end
 
+    def text(val, text_style = nil)
+      @items << Clarus::TextBlock.new(val, text_style)
+    end
+
     def new_paragraph
       paragraph = Clarus::Paragraph.new
       yield(paragraph)
