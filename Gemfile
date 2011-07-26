@@ -1,6 +1,4 @@
-source "http://rubygems.org"
+source :rubygems
 
 # Specify your gem's dependencies in clarus.gemspec
 gemspec
-
-gem 'erubis'

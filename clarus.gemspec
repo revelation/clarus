@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'json'
   s.add_dependency 'imagesize'
+  s.add_dependency 'erubis'
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'minitest'
