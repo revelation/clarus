@@ -26,9 +26,8 @@ class Clarus::DocumentSpec < MiniTest::Spec
 
     describe "#text" do
       it "should be able to add a text block"do
-        text = "damascus, not constantinople"
-        @clarus.text(text)
-        @clarus.stream_document.must_match text
+        @clarus.text("now it's istanbul, not constantinople")
+        @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/output/add_text_document.doc').strip
       end
     end
 

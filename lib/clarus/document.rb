@@ -6,7 +6,9 @@ module Clarus
     end
 
     def text(val, text_style = nil)
-      @items << Clarus::TextBlock.new(val, text_style)
+      new_paragraph do |p|
+        p.add_text(val, text_style)
+      end
     end
 
     def new_paragraph
