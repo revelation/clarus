@@ -1,0 +1,10 @@
+<w:p wsp:rsidR="0023207C" wsp:rsidRDefault="00A30FBB">
+  <w:hlink w:dest="https://example.com/somepath?var1=swoobaz&amp;var2=swoobinja">
+    <w:r wsp:rsidRPr="00A30FBB">
+      <w:rPr>
+        <w:rStyle w:val="Hyperlink"/>
+      </w:rPr>
+      <w:t>Swoobaz and Swoobinja</w:t>
+    </w:r>
+  </w:hlink>
+</w:p>

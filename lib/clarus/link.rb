@@ -1,8 +1,12 @@
 module Clarus
   class Link
     def initialize(destination, text = nil)
-      @destination = destination
+      @destination = escape_url(destination)
       @text = text || destination
+    end
+
+    def escape_url(url)
+      url.gsub(/&/, '&amp;')
     end
 
     def render
