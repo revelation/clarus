@@ -1,6 +1,7 @@
 module Clarus
   class TextBlock
     def initialize(text, text_style)
+      text = escape_text(text)
       @text = text
       if text_style == :bold
         @style = '<w:b/>\n'
@@ -9,6 +10,10 @@ module Clarus
       elsif text_style == :italic
         @style = '<w:i/>\n'
       end
+    end
+
+    def escape_text(text)
+      text.gsub(/&/, '&amp;')
     end
 
     def render
