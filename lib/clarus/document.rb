@@ -5,14 +5,14 @@ module Clarus
       @items = []
     end
 
-    def text(val, text_style = nil)
-      new_paragraph do |p|
+    def text(val, text_style = nil, indent = 0)
+      new_paragraph(indent) do |p|
         p.add_text(val, text_style)
       end
     end
 
-    def new_paragraph
-      paragraph = Clarus::Paragraph.new
+    def new_paragraph(indent = 0)
+      paragraph = Clarus::Paragraph.new(indent)
       yield(paragraph)
       @items << paragraph
     end

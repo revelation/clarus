@@ -12,6 +12,13 @@ class Clarus::DocumentSpec < MiniTest::Spec
           p.class.must_equal(Clarus::Paragraph)
         end
       end
+
+      it "should handle indentation" do
+        @clarus.new_paragraph(1) do |p|
+          p.add_text("Why did constantinople get the works?")
+          p.render.must_match File.read(Dir.pwd + '/spec/output/indent.doc').strip
+        end
+      end
     end
 
     describe "#paragraph_break" do
@@ -25,9 +32,14 @@ class Clarus::DocumentSpec < MiniTest::Spec
     end
 
     describe "#text" do
-      it "should be able to add a text block"do
+      it "should be able to add a text block" do
         @clarus.text("now it's istanbul, not constantinople")
         @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/output/add_text_document.doc').strip
+      end
+
+      it "should support indentation" do
+        @clarus.text("This text is indented two levels.", nil, 2)
+        @clarus.stream_document.must_match File.read(Dir.pwd + '/spec/output/double_indent.doc').strip
       end
     end
 
