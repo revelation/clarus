@@ -1,3 +1,5 @@
+require 'cgi'
+
 module Clarus
   class TextBlock
     def initialize(text, text_style)
@@ -13,7 +15,7 @@ module Clarus
     end
 
     def escape_text(text)
-      text.gsub(/&/, '&amp;')
+      CGI.escapeHTML text
     end
 
     def render
