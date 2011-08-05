@@ -40,6 +40,7 @@ module Clarus
 
     def image(uri)
       @items << Clarus::Image.new(uri)
+      @items << Clarus::ParagraphBreak.new
     end
 
     def stream_document
